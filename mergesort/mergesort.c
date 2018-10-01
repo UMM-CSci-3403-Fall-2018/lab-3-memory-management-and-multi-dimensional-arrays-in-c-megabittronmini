@@ -8,19 +8,19 @@ bool needsSorting(int rangeSize) {
     return rangeSize >= 2;
 }
 
-void mergeRanges(int *values, int start, int midpoint,
+void mergeRanges(int *values, int start, int midPoint,
   int end) {
     int rangeSize = end - start;
     int *destination = (int*) calloc(rangeSize+1, sizeof(int));
     int first = start;
     int second = midPoint;
     int copy = 0;
-    while (first < midPoint && second < endIndex) {
+    while (first < midPoint && second < end) {
       if (values[first] < values[second]) {
         destination[copy] = values[first];
         ++first;
       } else {
-        destination[copyIndex] = values[second];
+        destination[copy] = values[second];
         ++second;
       }
       ++copy;
@@ -47,10 +47,10 @@ void mergesortRange(int *values, int start, int end){
   int midPoint = (start + end) / 2;
   mergesortRange(values, start, midPoint);
   mergesortRange(values, midPoint, end);
-  mergeRanges(values, startIndex, midPoint, end);
+  mergeRanges(values, start, midPoint, end);
  }
 }
 
 void mergesort(int size, int *values){
-mergesortRange(values, 0, size);
+  mergesortRange(values, 0, size);
 }
