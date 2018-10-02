@@ -1,15 +1,13 @@
 #include<stdlib.h>
 #include<stdio.h>
-
 #include"mergesort.h"
 
-//Checks if the range is atleast 2 and it needs sorting. Since if the input is just 1. It is already sorted. 
+//There's no need to sort an array less than size 2
 bool needsSorting(int rangeSize) {
     return rangeSize >= 2;
 }
 
-void mergeRanges(int *values, int start, int midPoint,
-  int end) {
+void mergeRanges(int *values, int start, int midPoint, int end) {
     int rangeSize = end - start;
     int *destination = (int*) calloc(rangeSize+1, sizeof(int));
     int first = start;
@@ -41,16 +39,16 @@ void mergeRanges(int *values, int start, int midPoint,
     free(destination);
 }
 
-void mergesortRange(int *values, int start, int end){
- int rangeSize = end - start;
- if (needsSorting(rangeSize)) {
-  int midPoint = (start + end) / 2;
-  mergesortRange(values, start, midPoint);
-  mergesortRange(values, midPoint, end);
-  mergeRanges(values, start, midPoint, end);
- }
+void mergesortRange(int *values, int start, int end) {
+  int rangeSize = end - start;
+  if (needsSorting(rangeSize)) {
+    int midPoint = (start + end) / 2;
+    mergesortRange(values, start, midPoint);
+    mergesortRange(values, midPoint, end);
+    mergeRanges(values, start, midPoint, end);
+  }
 }
 
-void mergesort(int size, int *values){
+void mergesort(int size, int *values) {
   mergesortRange(values, 0, size);
 }
